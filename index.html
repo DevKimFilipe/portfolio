@@ -3,634 +3,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kim Borges | Desenvolvedor Full Stack</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+    <title>Kim Borges — Portfólio</title>
+    <meta name="description" content="Portfólio de Kim Borges, estudante de Engenharia de Software com foco em desenvolvimento web, IA e automação.">
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #e5e5e5;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
-        /* Canvas de partículas - fundo animado */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 0;
-            pointer-events: none;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* Navegação */
-        nav {
-            padding: 2rem 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            border-bottom: 1px solid rgba(57, 255, 20, 0.1);
-        }
-
-        nav .container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-weight: 700;
-            font-size: 1.5rem;
-            color: #fff;
-        }
-
-        .logo span {
-            color: #39ff14;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: #a3a3a3;
-            text-decoration: none;
-            transition: color 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .nav-links a:hover {
-            color: #39ff14;
-            text-shadow: 0 0 10px rgba(57, 255, 20, 0.5);
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            padding-top: 80px;
-            position: relative;
-        }
-
-        .hero-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .hero-text h1 {
-            font-size: 3.5rem;
-            font-weight: 700;
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-        }
-
-        .hero-text h1 span {
-            color: #39ff14;
-        }
-
-        .hero-text p {
-            font-size: 1.25rem;
-            color: #a3a3a3;
-            margin-bottom: 2rem;
-            max-width: 500px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #39ff14;
-            color: #0a0a0a;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 700;
-            transition: all 0.3s;
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn:hover {
-            background: #2dd90f;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 40px rgba(57, 255, 20, 0.4);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #39ff14;
-            color: #39ff14;
-            margin-left: 1rem;
-        }
-
-        .btn-outline:hover {
-            background: #39ff14;
-            color: #0a0a0a;
-        }
-
-        .hero-image {
-            display: flex;
-            justify-content: center;
-        }
-
-        .profile-img {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #39ff14, #00ff88);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 6rem;
-            color: #0a0a0a;
-            font-weight: 700;
-            box-shadow: 0 20px 60px rgba(57, 255, 20, 0.4);
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 20px 60px rgba(57, 255, 20, 0.4); }
-            50% { box-shadow: 0 20px 80px rgba(57, 255, 20, 0.7); }
-        }
-
-        /* Sobre */
-        .sobre {
-            padding: 6rem 0;
-            background: rgba(17, 17, 17, 0.9);
-            position: relative;
-        }
-
-        .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .section-title span {
-            color: #39ff14;
-        }
-
-        .section-subtitle {
-            color: #a3a3a3;
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .skill-card {
-            background: rgba(26, 26, 26, 0.9);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid rgba(57, 255, 20, 0.1);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .skill-card:hover {
-            border-color: #39ff14;
-            transform: translateY(-5px);
-            box-shadow: 0 10px 40px rgba(57, 255, 20, 0.15);
-        }
-
-        .skill-card h3 {
-            color: #39ff14;
-            margin-bottom: 0.5rem;
-            font-size: 1.25rem;
-        }
-
-        .skill-card p {
-            color: #a3a3a3;
-            font-size: 0.9rem;
-        }
-
-        /* Projetos */
-        .projetos {
-            padding: 6rem 0;
-            position: relative;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: rgba(26, 26, 26, 0.9);
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(57, 255, 20, 0.1);
-            transition: all 0.3s;
-            backdrop-filter: blur(5px);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            border-color: #39ff14;
-            box-shadow: 0 10px 40px rgba(57, 255, 20, 0.15);
-        }
-
-        .project-img {
-            height: 200px;
-            background: linear-gradient(135deg, #39ff14, #00ff88);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .project-info {
-            padding: 1.5rem;
-        }
-
-        .project-info h3 {
-            margin-bottom: 0.5rem;
-        }
-
-        .project-info p {
-            color: #a3a3a3;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-        }
-
-        .tech-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tech-tag {
-            padding: 0.25rem 0.75rem;
-            background: #262626;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            color: #a3a3a3;
-        }
-
-        .tech-tag.java {
-            background: #e76f00;
-            color: #fff;
-        }
-
-        .tech-tag.spring {
-            background: #6db33f;
-            color: #fff;
-        }
-
-        /* Contato */
-        .contato {
-            padding: 6rem 0;
-            background: rgba(17, 17, 17, 0.9);
-            text-align: center;
-            position: relative;
-        }
-
-        .contato p {
-            color: #a3a3a3;
-            margin-bottom: 2rem;
-            font-size: 1.1rem;
-        }
-
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .social-links a {
-            padding: 1rem 2rem;
-            background: rgba(26, 26, 26, 0.9);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 8px;
-            border: 1px solid rgba(57, 255, 20, 0.1);
-            transition: all 0.3s;
-        }
-
-        .social-links a:hover {
-            border-color: #39ff14;
-            background: rgba(57, 255, 20, 0.1);
-            color: #39ff14;
-            box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
-        }
-
-        /* Footer */
-        footer {
-            padding: 2rem 0;
-            text-align: center;
-            color: #525252;
-            border-top: 1px solid rgba(57, 255, 20, 0.1);
-            position: relative;
-            background: rgba(10, 10, 10, 0.9);
-        }
-
-        footer span {
-            color: #39ff14;
-        }
-
-        /* Responsivo */
-        @media (max-width: 768px) {
-            .hero-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
-
-            .hero-text h1 {
-                font-size: 2.5rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-
-            .profile-img {
-                width: 200px;
-                height: 200px;
-                font-size: 4rem;
-            }
-
-            .btn-outline {
-                margin-left: 0;
-                margin-top: 1rem;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Canvas de partículas -->
-    <canvas id="particles-canvas"></canvas>
+    <!-- ============== CABEÇALHO / NAVEGAÇÃO FIXA ============== -->
+    <header>
+        <div class="header__inner">
+            <a href="#topo" class="logo">Kim<span class="logo__ponto">.</span></a>
 
-    <!-- Navegação -->
-    <nav>
-        <div class="container">
-            <div class="logo">Kim<span>.</span></div>
-            <ul class="nav-links">
-                <li><a href="#sobre">Sobre</a></li>
-                <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-        </div>
-    </nav>
+            <nav>
+                <ul id="navLista">
+                    <li><a href="#sobre" class="nav-link" data-secao="sobre">Sobre mim</a></li>
+                    <li><a href="#formacao" class="nav-link" data-secao="formacao">Formação</a></li>
+                    <li><a href="#portfolio" class="nav-link" data-secao="portfolio">Portfólio</a></li>
+                    <li><a href="#contato" class="nav-link" data-secao="contato">Contato</a></li>
+                </ul>
+            </nav>
 
-    <!-- Hero -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Olá, eu sou <span>Kim Borges</span></h1>
-                    <p>Estudante de Engenharia de Software. Construindo soluções digitais com Java, Spring Boot e tecnologias modernas. Me preparando para viver como desenvolvedor nômade.</p>
-                    <a href="#projetos" class="btn">Ver Projetos</a>
-                    <a href="#contato" class="btn btn-outline">Falar Comigo</a>
-                </div>
-                <div class="hero-image">
-                    <div class="profile-img">KB</div>
-                </div>
+            <div class="header__acoes">
+                <button id="themeButton" type="button" aria-label="Alternar tema claro/escuro">
+                    <span id="themeIcone" aria-hidden="true">☾</span>
+                </button>
+                <button id="menuButton" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="navLista">
+                    <span></span><span></span><span></span>
+                </button>
             </div>
         </div>
-    </section>
+    </header>
 
-    <!-- Sobre -->
-    <section class="sobre" id="sobre">
-        <div class="container">
-            <h2 class="section-title">Sobre <span>Mim</span></h2>
-            <p class="section-subtitle">Tecnologias e habilidades que estou desenvolvendo</p>
-            
-            <div class="skills-grid">
-                <div class="skill-card">
-                    <h3>Frontend</h3>
-                    <p>HTML5, CSS3, JavaScript, React e Next.js. Criando interfaces modernas e responsivas.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Backend Java</h3>
-                    <p>Java, Spring Boot, APIs REST, JPA/Hibernate, Maven/Gradle e arquitetura MVC.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Banco de Dados</h3>
-                    <p>PostgreSQL, MySQL, MongoDB. Modelagem, queries otimizadas e integração com Spring Data JPA.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>IA & Automação</h3>
-                    <p>Integração com APIs de IA, automação de workflows e agentes inteligentes.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>DevOps</h3>
-                    <p>Git, GitHub, Docker básico, deploy na Vercel/Render e noções de cloud AWS.</p>
-                </div>
-                <div class="skill-card">
-                    <h3>Metodologias</h3>
-                    <p>Scrum, Kanban, TDD, clean code e boas práticas de desenvolvimento ágil.</p>
+    <main id="topo">
+
+        <!-- ============== HERO ============== -->
+        <section class="hero">
+            <div class="hero__fundo" aria-hidden="true"></div>
+            <div class="hero__conteudo">
+                <p class="eyebrow">Portfólio &amp; currículo</p>
+                <h1 class="hero__nome">Kim Borges</h1>
+                <p class="hero__cargo">Estudante de Engenharia de Software</p>
+                <p class="hero__bio">
+                    Construo interfaces, automações e ideias com a mesma curiosidade de quem
+                    está sempre testando o próximo projeto. Foco em desenvolvimento web,
+                    inteligência artificial e automação de processos — com os olhos postos
+                    numa carreira internacional em tecnologia.
+                </p>
+                <div class="hero__acoes">
+                    <a href="#portfolio" class="botao botao--cheio">Ver projetos</a>
+                    <a href="#contato" class="botao botao--linha">Falar comigo</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Projetos -->
-    <section class="projetos" id="projetos">
-        <div class="container">
-            <h2 class="section-title">Meus <span>Projetos</span></h2>
-            <p class="section-subtitle">Alguns dos meus trabalhos recentes</p>
-            
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-img">☕</div>
-                    <div class="project-info">
-                        <h3>API REST com Spring Boot</h3>
-                        <p>Sistema completo de cadastro com autenticação JWT, CRUD de usuários e integração com banco PostgreSQL.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag java">Java</span>
-                            <span class="tech-tag spring">Spring Boot</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">JWT</span>
-                        </div>
+        <!-- ============== SOBRE MIM ============== -->
+        <section id="sobre" class="secao">
+            <div class="secao__cabecalho">
+                <p class="eyebrow">01 — quem sou eu</p>
+                <h2>Sobre mim</h2>
+            </div>
+
+            <div class="sobre__grade">
+                <div class="sobre__texto">
+                    <p>
+                        Meu nome é Kim Borges e sou estudante de Engenharia de Software na
+                        UNINTER. Tenho grande interesse por tecnologia, desenvolvimento web,
+                        inteligência artificial, automação de processos e empreendedorismo
+                        digital.
+                    </p>
+                    <p>
+                        Meu objetivo é construir uma carreira internacional na área de
+                        tecnologia, trabalhando com desenvolvimento de software e soluções
+                        digitais que realmente facilitem a vida de quem as usa.
+                    </p>
+                </div>
+
+                <div class="hobbies">
+                    <h3>Hobbies &amp; interesses</h3>
+                    <ul class="hobbies__lista">
+                        <li><span aria-hidden="true">📚</span>Leitura</li>
+                        <li><span aria-hidden="true">💻</span>Estudo de tecnologia</li>
+                        <li><span aria-hidden="true">🌱</span>Desenvolvimento pessoal</li>
+                        <li><span aria-hidden="true">🌍</span>Aprender idiomas</li>
+                        <li><span aria-hidden="true">✨</span>Criação de projetos digitais</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============== FORMAÇÃO ============== -->
+        <section id="formacao" class="secao secao--alt">
+            <div class="secao__cabecalho">
+                <p class="eyebrow">02 — trajetória</p>
+                <h2>Formação</h2>
+            </div>
+
+            <div class="formacao__grade">
+                <div class="formacao__bloco">
+                    <h3>Graduação</h3>
+                    <div class="formacao__item">
+                        <span class="formacao__tag">Em andamento</span>
+                        <p class="formacao__nome">Engenharia de Software</p>
+                        <p class="formacao__instituicao">Centro Universitário UNINTER</p>
                     </div>
                 </div>
-                
-                <div class="project-card">
-                    <div class="project-img">🚀</div>
-                    <div class="project-info">
-                        <h3>Landing Page Profissional</h3>
-                        <p>Site de conversão para pequenos negócios com design responsivo e otimizado.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                    </div>
+
+                <div class="formacao__bloco">
+                    <h3>Cursos</h3>
+                    <ul class="lista-chips">
+                        <li>HTML5 e CSS3</li>
+                        <li>JavaScript</li>
+                        <li>Git e GitHub</li>
+                        <li>Fundamentos da Programação</li>
+                    </ul>
                 </div>
-                
-                <div class="project-card">
-                    <div class="project-img">🤖</div>
-                    <div class="project-info">
-                        <h3>Bot de Automação</h3>
-                        <p>Automação de tarefas repetitivas usando Python e integração com APIs.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">APIs</span>
-                            <span class="tech-tag">Automação</span>
-                        </div>
+
+                <div class="formacao__bloco">
+                    <h3>Idiomas</h3>
+                    <div class="idioma">
+                        <div class="idioma__topo"><span>Português</span><span>Nativo</span></div>
+                        <div class="idioma__trilha"><div class="idioma__progresso" data-nivel="100"></div></div>
                     </div>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-img">📊</div>
-                    <div class="project-info">
-                        <h3>Dashboard com Spring Boot</h3>
-                        <p>Painel administrativo com backend Java, gráficos dinâmicos e relatórios em PDF.</p>
-                        <div class="tech-tags">
-                            <span class="tech-tag java">Java</span>
-                            <span class="tech-tag spring">Spring Boot</span>
-                            <span class="tech-tag">Thymeleaf</span>
-                            <span class="tech-tag">Chart.js</span>
-                        </div>
+                    <div class="idioma">
+                        <div class="idioma__topo"><span>Inglês</span><span>Intermediário</span></div>
+                        <div class="idioma__trilha"><div class="idioma__progresso" data-nivel="65"></div></div>
+                    </div>
+                    <div class="idioma">
+                        <div class="idioma__topo"><span>Alemão</span><span>Em aprendizado</span></div>
+                        <div class="idioma__trilha"><div class="idioma__progresso" data-nivel="20"></div></div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Contato -->
-    <section class="contato" id="contato">
-        <div class="container">
-            <h2 class="section-title">Vamos <span>Trabalhar</span> Juntos?</h2>
-            <p>Estou disponível para freelances e projetos. Entre em contato.</p>
-            <a href="mailto:techcodekimfilipe@gmail.com" class="btn">Enviar Email</a>
-            
-            <div class="social-links">
-                <a href="https://linkedin.com/in/kimfilipe-dev/" target="_blank">LinkedIn</a>
-                <a href="https://github.com/DevKimFilipe" target="_blank">GitHub</a>
-                <a href="https://wa.me/5581997623079" target="_blank">WhatsApp</a>
+        <!-- ============== PORTFÓLIO ============== -->
+        <section id="portfolio" class="secao">
+            <div class="secao__cabecalho">
+                <p class="eyebrow">03 — projetos</p>
+                <h2>Portfólio</h2>
             </div>
-        </div>
-    </section>
 
-    <!-- Footer -->
+            <div class="cards">
+                <article class="card">
+                    <span class="card__numero">01</span>
+                    <h3><a href="https://devkimfilipe.github.io/chama-facil/" target="_blank" rel="noopener noreferrer">Chama Fácil</a></h3>
+                    <p>
+                        Protótipo desenvolvido no Figma para auxiliar idosos na utilização
+                        de aplicativos de transporte, com foco em acessibilidade e
+                        simplicidade de navegação.
+                    </p>
+                    <span class="card__tag">UX · Figma</span>
+                </article>
+
+                <article class="card">
+                    <span class="card__numero">02</span>
+                    <h3><a href="https://devkimfilipe.github.io/study-planner-pro/" target="_blank" rel="noopener noreferrer">Cronograma de Estudos</a></h3>
+                    <p>
+                        Projeto desenvolvido utilizando HTML e CSS para organização de
+                        estudos, com visualização clara de tarefas e prazos.
+                    </p>
+                    <span class="card__tag">HTML · CSS</span>
+                </article>
+
+                <article class="card">
+                    <span class="card__numero">03</span>
+                    <h3><a href="https://devkimfilipe.github.io/carrer-journey/" target="_blank" rel="noopener noreferrer">Projetos Acadêmicos</a></h3>
+                    <p>
+                        Repositório contendo atividades e projetos realizados durante a
+                        graduação, documentando minha evolução técnica.
+                    </p>
+                    <span class="card__tag">GitHub</span>
+                </article>
+            </div>
+        </section>
+
+        <!-- ============== CONTATO ============== -->
+        <section id="contato" class="secao secao--alt">
+            <div class="secao__cabecalho">
+                <p class="eyebrow">04 — vamos conversar</p>
+                <h2>Contato</h2>
+            </div>
+
+            <form id="contactForm" class="formulario" novalidate>
+                <div class="campo">
+                    <label for="nome">Nome</label>
+                    <input type="text" id="nome" placeholder="Seu nome">
+                    <span class="campo__erro" id="erroNome"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="seu@email.com">
+                    <span class="campo__erro" id="erroEmail"></span>
+                </div>
+
+                <div class="campo">
+                    <label for="mensagem">Mensagem</label>
+                    <textarea id="mensagem" placeholder="Digite sua mensagem"></textarea>
+                    <span class="campo__erro" id="erroMensagem"></span>
+                </div>
+
+                <button type="submit" class="botao botao--cheio">Enviar mensagem</button>
+                <p id="resultado" role="status"></p>
+            </form>
+        </section>
+
+    </main>
+
     <footer>
-        <div class="container">
-            <p> <span>Kim Borges</span>. Todos os direitos reservados.</p>
-        </div>
+        <p>© <span id="anoAtual">2026</span> Kim Borges. Todos os direitos reservados.</p>
     </footer>
 
-    <!-- Script das partículas -->
-    <script>
-        const canvas = document.getElementById('particles-canvas');
-        const ctx = canvas.getContext('2d');
-
-        let width, height;
-        let particles = [];
-        const particleCount = 100;
-        const connectionDistance = 150;
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.vy = (Math.random() - 0.5) * 0.5;
-                this.size = Math.random() * 2 + 1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                if (this.x < 0 || this.x > width) this.vx *= -1;
-                if (this.y < 0 || this.y > height) this.vy *= -1;
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(57, 255, 20, 0.6)';
-                ctx.fill();
-            }
-        }
-
-        function init() {
-            particles = [];
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function drawConnections() {
-            for (let i = 0; i < particles.length; i++) {
-                for (let j = i + 1; j < particles.length; j++) {
-                    const dx = particles[i].x - particles[j].x;
-                    const dy = particles[i].y - particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-
-                    if (distance < connectionDistance) {
-                        ctx.beginPath();
-                        ctx.moveTo(particles[i].x, particles[i].y);
-                        ctx.lineTo(particles[j].x, particles[j].y);
-                        ctx.strokeStyle = `rgba(57, 255, 20, ${0.2 * (1 - distance / connectionDistance)})`;
-                        ctx.lineWidth = 1;
-                        ctx.stroke();
-                    }
-                }
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-
-            drawConnections();
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            resize();
-            init();
-        });
-
-        resize();
-        init();
-        animate();
-    </script>
-
+    <script src="script.js"></script>
 </body>
 </html>
